@@ -1,3 +1,4 @@
+<?php include "menu.php"; ?>
 <?php
 require_once "../classes/Auteur.php";
 

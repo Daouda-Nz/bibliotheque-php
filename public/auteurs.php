@@ -1,3 +1,4 @@
+<?php include "menu.php"; ?>
 <?php
 require_once "../classes/Auteur.php";
 
@@ -23,18 +24,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     exit;
 }
 
-// 🔥 LISTE
+// 🔥 LISTE DES AUTEURS
 $liste = $auteur->afficher();
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Gestion des auteurs</title>
+    <title>Gestion des Auteurs</title>
 </head>
 <body>
 
-<h2>Ajouter un auteur</h2>
+<h2>➕ Ajouter un auteur</h2>
 
 <form method="POST">
     <input type="text" name="nom" placeholder="Nom" required><br><br>
@@ -45,19 +46,27 @@ $liste = $auteur->afficher();
 
 <hr>
 
-<h2>Liste des auteurs</h2>
+<h2>📚 Liste des auteurs</h2>
 
 <?php foreach ($liste as $a) { ?>
+
     <p>
-        <?= $a["id"] ?> - 
-        <?= $a["nom"] ?> <?= $a["prenom"] ?> - 
+        <strong><?= $a["id"] ?></strong> -
+        <?= $a["nom"] ?> <?= $a["prenom"] ?> -
         <?= $a["nationalite"] ?>
 
-        <a href="auteurs.php?delete=<?= $a["id"] ?>" 
+        <!-- 🔥 MODIFIER -->
+        <a href="edit_auteur.php?id=<?= $a["id"] ?>">
+            ✏️ Modifier
+        </a>
+
+        <!-- 🔥 SUPPRIMER -->
+        <a href="auteurs.php?delete=<?= $a["id"] ?>"
            onclick="return confirm('Supprimer cet auteur ?')">
-           Supprimer
+            ❌ Supprimer
         </a>
     </p>
+
 <?php } ?>
 
 </body>
