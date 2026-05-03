@@ -1,73 +1,60 @@
-<?php include "menu.php"; ?>
 <?php
 require_once "../classes/Auteur.php";
-
 $auteur = new Auteur();
 
-// 🔥 SUPPRESSION
-if (isset($_GET["delete"])) {
-    $id = $_GET["delete"];
-    $auteur->supprimer($id);
-    header("Location: auteurs.php");
-    exit;
-}
-
-// 🔥 AJOUT
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nom = $_POST["nom"];
-    $prenom = $_POST["prenom"];
-    $nationalite = $_POST["nationalite"];
-
-    $auteur->ajouter($nom, $prenom, $nationalite);
-
+    $auteur->ajouter($_POST["nom"], $_POST["prenom"], $_POST["nationalite"]);
     header("Location: auteurs.php");
     exit;
 }
 
-// 🔥 LISTE DES AUTEURS
+if (isset($_GET["delete"])) {
+    $auteur->supprimer($_GET["delete"]);
+    header("Location: auteurs.php");
+    exit;
+}
+
 $liste = $auteur->afficher();
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Gestion des Auteurs</title>
+    <title>Auteurs</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h2>➕ Ajouter un auteur</h2>
+<header><h1>👨‍🏫 Auteurs</h1></header>
+
+<nav>
+    <a href="index.php">Accueil</a>
+    <a href="auteurs.php">Auteurs</a>
+    <a href="categories.php">Catégories</a>
+    <a href="livres.php">Livres</a>
+</nav>
+
+<div class="container">
+
+<h2>Ajouter auteur</h2>
 
 <form method="POST">
-    <input type="text" name="nom" placeholder="Nom" required><br><br>
-    <input type="text" name="prenom" placeholder="Prénom" required><br><br>
-    <input type="text" name="nationalite" placeholder="Nationalité" required><br><br>
-    <button type="submit">Ajouter</button>
+    <input type="text" name="nom" placeholder="Nom">
+    <input type="text" name="prenom" placeholder="Prénom">
+    <input type="text" name="nationalite" placeholder="Nationalité">
+    <button>Ajouter</button>
 </form>
 
-<hr>
-
-<h2>📚 Liste des auteurs</h2>
+<h2>Liste</h2>
 
 <?php foreach ($liste as $a) { ?>
-
-    <p>
-        <strong><?= $a["id"] ?></strong> -
-        <?= $a["nom"] ?> <?= $a["prenom"] ?> -
-        <?= $a["nationalite"] ?>
-
-        <!-- 🔥 MODIFIER -->
-        <a href="edit_auteur.php?id=<?= $a["id"] ?>">
-            ✏️ Modifier
-        </a>
-
-        <!-- 🔥 SUPPRIMER -->
-        <a href="auteurs.php?delete=<?= $a["id"] ?>"
-           onclick="return confirm('Supprimer cet auteur ?')">
-            ❌ Supprimer
-        </a>
-    </p>
-
+    <div class="card">
+        <?= $a["nom"] ?> <?= $a["prenom"] ?> - <?= $a["nationalite"] ?>
+        <a href="?delete=<?= $a["id"] ?>">❌</a>
+    </div>
 <?php } ?>
+
+</div>
 
 </body>
 </html>

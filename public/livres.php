@@ -1,10 +1,7 @@
-<?php include "menu.php"; ?>
 <?php
 require_once "../classes/Livre.php";
-
 $livre = new Livre();
 
-// ajout test
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $livre->ajouter(
         $_POST["titre"],
@@ -14,12 +11,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_POST["auteur_id"],
         $_POST["categorie_id"]
     );
-
     header("Location: livres.php");
     exit;
 }
 
-// suppression
 if (isset($_GET["delete"])) {
     $livre->supprimer($_GET["delete"]);
     header("Location: livres.php");
@@ -29,29 +24,50 @@ if (isset($_GET["delete"])) {
 $liste = $livre->afficher();
 ?>
 
-<h2>Ajouter un livre</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Livres</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header><h1>📚 Livres</h1></header>
+
+<nav>
+    <a href="index.php">Accueil</a>
+    <a href="auteurs.php">Auteurs</a>
+    <a href="categories.php">Catégories</a>
+    <a href="livres.php">Livres</a>
+</nav>
+
+<div class="container">
+
+<h2>Ajouter livre</h2>
 
 <form method="POST">
-    <input type="text" name="titre" placeholder="Titre"><br>
-    <input type="text" name="isbn" placeholder="ISBN"><br>
-    <input type="number" name="annee" placeholder="Année"><br>
-    <input type="number" name="quantite" placeholder="Quantité"><br>
-    <input type="number" name="auteur_id" placeholder="ID auteur"><br>
-    <input type="number" name="categorie_id" placeholder="ID catégorie"><br>
-
-    <button type="submit">Ajouter</button>
+    <input type="text" name="titre" placeholder="Titre">
+    <input type="text" name="isbn" placeholder="ISBN">
+    <input type="number" name="annee" placeholder="Année">
+    <input type="number" name="quantite" placeholder="Quantité">
+    <input type="number" name="auteur_id" placeholder="ID auteur">
+    <input type="number" name="categorie_id" placeholder="ID catégorie">
+    <button>Ajouter</button>
 </form>
 
-<hr>
-
-<h2>Liste des livres</h2>
+<h2>Liste livres</h2>
 
 <?php foreach ($liste as $l) { ?>
-    <p>
-        <?= $l["titre"] ?> -
-        <?= $l["auteur"] ?> -
-        <?= $l["categorie"] ?> -
-
-        <a href="livres.php?delete=<?= $l["id"] ?>">Supprimer</a>
-    </p>
+    <div class="card">
+        <div>
+            <b><?= $l["titre"] ?></b><br>
+            <?= $l["auteur"] ?> - <?= $l["categorie"] ?>
+        </div>
+        <a href="?delete=<?= $l["id"] ?>">❌</a>
+    </div>
 <?php } ?>
+
+</div>
+
+</body>
+</html>
