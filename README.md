@@ -99,8 +99,8 @@ http://localhost/bibliotheque/public/index.php
 
 
 🧪 Fonctionnement
-Ajouter des auteurs
-Ajouter des catégories
-Ajouter des livres
-Emprunter des livres
-Gérer les retours
+Ajouter des auteurs ,
+Ajouter des catégories ,
+Ajouter des livres ,
+Emprunter des livres ,
+Gérer les retours ,
