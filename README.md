@@ -91,5 +91,16 @@ bibliotheque/
 
 ### 2. Créer la base de données
 
-```sql
-CREATE DATABASE bibliotheque;
+### 3. Importer les tables
+
+### 4. Lancer le projet
+
+http://localhost/bibliotheque/public/index.php
+
+
+🧪 Fonctionnement
+Ajouter des auteurs
+Ajouter des catégories
+Ajouter des livres
+Emprunter des livres
+Gérer les retours
