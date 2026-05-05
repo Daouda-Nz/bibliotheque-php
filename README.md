@@ -49,8 +49,6 @@ bibliotheque/
 └── README.md
 
 
-
-
 ---
 
 ## 🧠 Fonctionnalités
