@@ -98,7 +98,7 @@ bibliotheque/
 http://localhost/bibliotheque/public/index.php
 
 
-🧪 Fonctionnement
+🧪 Fonctionnement :
 Ajouter des auteurs ,
 Ajouter des catégories ,
 Ajouter des livres ,
